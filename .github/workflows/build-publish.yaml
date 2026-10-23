@@ -30,7 +30,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           flavor: |
-            latest=true
+            latest=${{ github.ref_name == 'master' }}
           tags: |
             type=ref,event=branch
             type=ref,event=pr
@@ -42,4 +42,4 @@ jobs:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}`
+          labels: ${{ steps.meta.outputs.labels }}

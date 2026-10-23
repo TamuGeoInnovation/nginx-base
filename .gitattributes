@@ -1,0 +1,2 @@
+# The scripts run in Linux containers: a CRLF checkout breaks the #!/bin/bash line.
+*.sh text eol=lf
