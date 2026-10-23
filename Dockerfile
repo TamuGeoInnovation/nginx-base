@@ -1,4 +1,4 @@
-FROM nginx:1.23.2-alpine
+FROM nginx:1.30.6-alpine
 
 ONBUILD ARG GIT_TAG
 ONBUILD ARG GIT_COMMIT
