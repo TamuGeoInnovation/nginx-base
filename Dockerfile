@@ -1,5 +1,9 @@
 FROM nginx:1.30.6-alpine
 
+# brotli-libs 1.2.0-r1 in this nginx image has CVE-2026-111497, an out-of-bounds write in the Brotli
+# decoder; Alpine fixed it in 1.2.1-r0. Remove this once nginx:1.30.6-alpine itself carries 1.2.1-r0 or later.
+RUN apk upgrade --no-cache brotli-libs
+
 ONBUILD ARG GIT_TAG
 ONBUILD ARG GIT_COMMIT
 ONBUILD ARG BUILD_DATE
