@@ -1,8 +1,9 @@
-FROM nginx:1.30.6-alpine
+FROM nginx:1.30.7-alpine
 
-# brotli-libs 1.2.0-r1 in this nginx image has CVE-2026-111497, an out-of-bounds write in the Brotli
-# decoder; Alpine fixed it in 1.2.1-r0. Remove this once nginx:1.30.6-alpine itself carries 1.2.1-r0 or later.
-RUN apk upgrade --no-cache brotli-libs
+# Take Alpine 3.24's pending package fixes at build time; the stable branch ships only fixes. On 19 November 2026 that was
+# libssl3/libcrypto3 3.5.9-r1 and zlib 1.4-r0. nginx 1.30.7's image already carries brotli-libs 1.2.1-r0 (CVE-2026-111497),
+# so the targeted brotli upgrade is gone. Monorepo issue #3216.
+RUN apk upgrade --no-cache
 
 ONBUILD ARG GIT_TAG
 ONBUILD ARG GIT_COMMIT
