@@ -3,6 +3,8 @@ FROM nginx:1.30.7-alpine
 # Take Alpine 3.24's pending package fixes at build time; the stable branch ships only fixes. On 19 November 2026 that was
 # libssl3/libcrypto3 3.5.9-r1 and zlib 1.4-r0. nginx 1.30.7's image already carries brotli-libs 1.2.1-r0 (CVE-2026-111497),
 # so the targeted brotli upgrade is gone. Monorepo issue #3216.
+# Rebuilt on 23 November 2026 for libxml2 2.13.9-r3 (CVE-2026-86144), which the image's own libxml2 2.13.9-r2 lacks.
+# Monorepo issue #3317. A rebuild is all it takes: this line exists so the merge publishes a new sha- tag.
 RUN apk upgrade --no-cache
 
 ONBUILD ARG GIT_TAG
